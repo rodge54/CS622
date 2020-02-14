@@ -73,6 +73,9 @@ public class Edit {
             firstLanguage = sc.nextLine();
         }
         catch (InputMismatchException e) {
+            e.printStackTrace();
+        }
+        finally {
             sc.close();//close scanner
         }
 
