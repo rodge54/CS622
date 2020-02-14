@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class ESOLStudent extends Student {
 
-    private String studentId;
+    private int studentId;
     private String englishLevel;
     private String firstLanguage;
     private ArrayList<Teacher> teachers;
 
-    public ESOLStudent(String firstName, String lastName, String birthDate, String gradeLevel, String studentId,
+    public ESOLStudent(String firstName, String lastName, String birthDate, String gradeLevel, int studentId,
                        String englishLevel, String firstLanguage, ArrayList<Teacher> teachers) {
         super(firstName, lastName, birthDate, gradeLevel);
         this.studentId = studentId;
@@ -20,11 +20,11 @@ public class ESOLStudent extends Student {
         this.teachers = teachers;
     }
 
-    public String getStudentId(){
+    public int getStudentId(){
         return studentId;
     }
 
-    public void setStudentId(String studentId){
+    public void setStudentId(int studentId){
         this.studentId = studentId;
     }
 

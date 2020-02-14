@@ -54,7 +54,7 @@ public class Main {
         String lastName = null;
         String birthDate = null;
         String gradeLevel = null;
-        String studentId = null;
+        int studentId = 0;
         String englishLevel = null;
         String firstLanguage = null;
 
@@ -64,7 +64,7 @@ public class Main {
             lastName = sc.next();
             birthDate = sc.next();
             gradeLevel = sc.next();
-            studentId = sc.next();
+            studentId = sc.nextInt();
             englishLevel = sc.next();
             firstLanguage = sc.next();
             //Don't read in teacherArr
@@ -152,7 +152,7 @@ public class Main {
 
                 case 4:
                     Edit edit = new Edit();
-                    edit.addESOLStudent(studArr);
+                    edit.addESOLStudent();
                     correct = true;
                     break;
 
