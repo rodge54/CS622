@@ -110,13 +110,7 @@ public class Edit {
         }
         finally {
             //Close fileWriter
-            try {
-                fileWriter.close();//Close fileWriter, if !null
-            }
-            //If file not found, exit system
-            catch (NullPointerException e){
-                System.exit(0);
-            }
+            if (fileWriter != null) sc.close();
         }
     }
 }

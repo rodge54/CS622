@@ -83,6 +83,7 @@ public class ESOLStudent extends Student {
                 "Name: " + getFirstName() + " " + getLastName() + "\n" +
                 "English Level: " + englishLevel + "\n" +
                 "FirstLanguage: " + firstLanguage +"\n" +
-                "Age: " + age;
+                "Age: " + age + "\n" +
+                "Grade Level: " + getGradeLevel();
     }
 }

@@ -15,7 +15,8 @@ public class Menus {
                 "\t3. Search by student’s grade level\n" +
                 "\t4. Add new Student\n" +
                 "\t5. Search for teacher by Grade Level\n" +
-                "\t6. Search for teacher by Last Name\n");
+                "\t6. Search for teacher by Last Name\n" +
+                "\t7. EXIT");
 
 //                  Not yet implemented
 //                 +

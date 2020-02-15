@@ -44,4 +44,17 @@ public class ESOLParaprofessional extends Teacher {
     public void setImagineLearningCertified(boolean imagineLearningCertified) {
         this.imagineLearningCertified = imagineLearningCertified;
     }
+
+    //Prints ESOLPara object
+    @Override
+    public String toString() {
+
+        return "***ESOLTeacher*** \n" +
+                "Name: " + getTitle() + " " + getFirstName() + " " + getLastName() + "\n" +
+                "Email Address: " + getEmailAddress() + "\n" +
+                "Grade Level: " + getGradeLevel() +"\n" +
+                "Languages Spoken: " + "\n" +
+                "Awaiting implementation"
+                ;
+    }
 }

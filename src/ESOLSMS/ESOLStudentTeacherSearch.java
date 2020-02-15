@@ -2,6 +2,7 @@ package ESOLSMS;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 public class ESOLStudentTeacherSearch{
 
@@ -13,18 +14,44 @@ public class ESOLStudentTeacherSearch{
         return teacher;
     }
 
-    public ArrayList<Integer> searchByEnglishLevel(String englishLevel, ArrayList<Student> studArr){
-        ArrayList<Integer> indexArr = new ArrayList<>();
-
-        //Iterates through ArrayList of students comparing Grade Levels
-        for (int i = 0; i < studArr.size(); i++){
-
-            //If Last Name is found return student Object
-            if(((ESOLStudent)studArr.get(i)).getEnglishLevel().equals(englishLevel)){
-                indexArr.add(i);
-            }
+    public ArrayList<Student> searchByEnglishLevelWithStream(String englishLevel, ArrayList<Student> studArr){
+        ArrayList<Student> newStudArr = new ArrayList<>();
+        studArr.stream().filter(p -> ((ESOLStudent)p).getEnglishLevel().equals(englishLevel)).forEach(p -> newStudArr.add(p));
+        if (newStudArr.isEmpty()){
+            System.out.println("Student at English Level " + englishLevel + " not found");
         }
-        return indexArr;
+        return newStudArr;
+    }
+
+    public ArrayList<?> searchByGradeLevelWithStream(String gradeLevel, ArrayList<?> personArr){
+
+        /*This class searches for students or teachers by last name based
+        on users choice at the main menu*/
+
+        ArrayList<Student> newStudArr = new ArrayList<>();
+        ArrayList<Teacher> newTeachArr = new ArrayList<>();
+
+        //Try-Catch checks if user is searching for an ESOLStudent
+        try{
+            personArr.stream().filter(p -> ((ESOLStudent)p).getGradeLevel().equals(gradeLevel)).forEach(p -> newStudArr.add((ESOLStudent)p));
+            if (newStudArr.isEmpty()){
+                System.out.println("Student in Grade Level " + gradeLevel + " not found");
+            }
+            return newStudArr;//Return students ArrayList
+        }
+        catch (ClassCastException ignored){}
+
+        //Try-Catch checks if user is searching for ESOLTeacher
+        try {
+            personArr.stream().filter(p -> ((Teacher)p).getGradeLevel().equals(gradeLevel)).forEach(p -> newTeachArr.add((Teacher)p));
+            if (newTeachArr.isEmpty()){
+                System.out.println("Teacher in Grade Level " + gradeLevel + " not found");
+            }
+            return newTeachArr;//Return teachers ArrayList
+        }
+        catch (ClassCastException ignored){}
+
+        return null;
     }
 
     public ArrayList<Integer> searchByGradeLevel(String gradeLevel, ArrayList<?> personArr) {
@@ -51,27 +78,34 @@ public class ESOLStudentTeacherSearch{
         return indexArr;
     }
 
-    public ArrayList<Integer> searchByLastName(String name, ArrayList<?> personArr) {
+    public ArrayList<?> searchByLastNameWithStream(String name, ArrayList<?> personArr){
 
-        ArrayList<Integer> indexArr = new ArrayList<>();
+        /*This class searches for students or teachers by last name based
+        on users choice at the main menu*/
 
-        //Iterates through ArrayList of students or teachers comparing Last Names
-        for (int i = 0; i < personArr.size(); i++){
+        ArrayList<Student> newStudArr = new ArrayList<>();
+        ArrayList<Teacher> newTeachArr = new ArrayList<>();
 
-            //If Last Name of student found, update index
-            if (personArr.get(i) instanceof ESOLStudent) {
-                if (((ESOLStudent)personArr.get(i)).getLastName().equals(name)) {
-                    indexArr.add(i);
-                }
+        //Try-Catch checks if user is searching for an ESOLStudent
+        try{
+            personArr.stream().filter(p -> ((ESOLStudent)p).getLastName().equals(name)).forEach(p -> newStudArr.add((ESOLStudent)p));
+            if (newStudArr.isEmpty()){
+                System.out.println("Student with Last Name " + name + " not found");
             }
-
-            //If Last Name of teacher found, update index
-            else if (personArr.get(i) instanceof ESOLTeacher) {
-                if (((ESOLTeacher) personArr.get(i)).getLastName().equals(name)) {
-                    indexArr.add(i);
-                }
-            }
+            return newStudArr;//Return students ArrayList
         }
-        return indexArr;
+        catch (ClassCastException ignored){}
+
+        //Try-Catch checks if user is searching for ESOLTeacher
+        try {
+            personArr.stream().filter(p -> ((Teacher)p).getLastName().equals(name)).forEach(p -> newTeachArr.add((Teacher)p));
+            if (newTeachArr.isEmpty()){
+                System.out.println("Teacher with Last Name " + name + " not found");
+            }
+            return newTeachArr;//Return teachers ArrayList
+        }
+        catch (ClassCastException ignored){}
+
+        return null;
     }
 }

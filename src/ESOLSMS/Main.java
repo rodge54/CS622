@@ -83,7 +83,7 @@ public class Main {
 
             Menus.startMenu();
 
-            sc = new Scanner(System.in);
+            sc = new Scanner(System.in);//New Scanner
             int userInput1 = 0;
 
             //Checks that selection from numbered list is correct
@@ -96,7 +96,7 @@ public class Main {
                 TimeUnit.SECONDS.sleep(2);
             }
 
-            sc = new Scanner(System.in);
+            sc = new Scanner(System.in);//New scanner
             String userInput2;
 
             //Each Menu Item is represented through switch cases
@@ -105,49 +105,19 @@ public class Main {
                 case 1:
                     System.out.println("Please enter the Last Name of Students you would like to find: ");
                     userInput2 = sc.nextLine();
-                    ArrayList<Integer> indexArr = studSearch.searchByLastName(userInput2, studArr);
-
-                    //If student not found message
-                    if (indexArr.isEmpty()){
-                        System.out.println("No students found with Last Name " + userInput2);
-                        TimeUnit.SECONDS.sleep(2);
-                        break;
-                    }
-
-                    //If student found, print all students and return true
-                    correct = GenericClass.printPerson(studArr, indexArr);
+                    correct = GenericClass.printPersonv2(studSearch.searchByLastNameWithStream(userInput2, studArr));
                     break;
 
                 case 2:
                     System.out.println("Please enter the English Level of Student's you would like to find: ");
                     userInput2 = sc.nextLine();
-                    indexArr = studSearch.searchByEnglishLevel(userInput2, studArr);
-
-                    //If student not found message
-                    if (indexArr.isEmpty()){
-                        System.out.println("No students found at English Level " + userInput2);
-                        TimeUnit.SECONDS.sleep(2);
-                        break;
-                    }
-
-                    //If student found, print all students and return true
-                    correct = GenericClass.printPerson(studArr, indexArr);
+                    correct = GenericClass.printPersonv2(studSearch.searchByEnglishLevelWithStream(userInput2, studArr));
                     break;
 
                 case 3:
-                    System.out.println("Please enter the Grade Level of Student's you would like to find: ");
+                    System.out.println("Please enter the Grade Level of Students you would like to find: ");
                     userInput2 = sc.nextLine();
-                    indexArr = studSearch.searchByGradeLevel(userInput2, studArr);
-
-                    //If student not found message
-                    if (indexArr.isEmpty()){
-                        System.out.println("No students found at Grade Level " + userInput2);
-                        TimeUnit.SECONDS.sleep(2);
-                        break;
-                    }
-
-                    //If student found, print all students and return true
-                    correct = GenericClass.printPerson(studArr, indexArr);
+                    correct = GenericClass.printPersonv2(studSearch.searchByGradeLevelWithStream(userInput2, studArr));
                     break;
 
                 case 4:
@@ -159,41 +129,25 @@ public class Main {
                 case 5:
                     System.out.println("Please enter the Grade Level of Teachers you would like to find: ");
                     userInput2 = sc.nextLine();
-                    indexArr = studSearch.searchByGradeLevel(userInput2, teachersArr);
-
-                    //If student not found message
-                    if (indexArr.isEmpty()){
-                        System.out.println("No teachers found at Grade Level " + userInput2);
-                        TimeUnit.SECONDS.sleep(2);
-                        break;
-                    }
-
-                    //If student found, print all teachers and return true
-                    correct = GenericClass.printPerson(teachersArr, indexArr);
+                    correct = GenericClass.printPersonv2(studSearch.searchByGradeLevelWithStream(userInput2, teachersArr));
                     break;
 
                 case 6:
                     System.out.println("Please enter the Last Name of Teachers you would like to find: ");
                     userInput2 = sc.nextLine();
-                    indexArr = studSearch.searchByLastName(userInput2, teachersArr);
+                    correct = GenericClass.printPersonv2(studSearch.searchByLastNameWithStream(userInput2, teachersArr));
+                    break;
 
-                    //If student not found message
-                    if (indexArr.isEmpty()){
-                        System.out.println("No teachers found with Last Name " + userInput2);
-                        TimeUnit.SECONDS.sleep(2);
-                        break;
-                    }
-
-                    //If student found, print all teachers and return true
-                    correct = GenericClass.printPerson(teachersArr, indexArr);
+                case 7:
+                    System.out.println("Thank you for using ESOL-SMS");
+                    correct = true;
                     break;
 
                 default:
-
                     System.out.println("Not in list, please enter new number");
                     TimeUnit.SECONDS.sleep(2);
             }
         }
-        sc.close();
+        sc.close();//Close Scanner
     }
 }
