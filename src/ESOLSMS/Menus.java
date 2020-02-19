@@ -1,6 +1,8 @@
 package ESOLSMS;
 
 public class Menus {
+    /*Creates Menus for easier navigation when
+    * running program from ESOLSMS/Main.java*/
 
     public static void welcomeMessage(){
         System.out.println("*******************************************");

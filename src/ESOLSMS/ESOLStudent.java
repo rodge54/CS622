@@ -1,10 +1,13 @@
 package ESOLSMS;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-public class ESOLStudent extends Student {
+public class ESOLStudent extends Student implements Serializable {
+    /*ESOLStudent creates an object to represent this type of student
+    * It is Serializable so it can be written to binary and sent to the UI*/
 
     private int studentId;
     private String englishLevel;

@@ -1,8 +1,12 @@
 package ESOLSMS;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ESOLParaprofessional extends Teacher {
+public class ESOLParaprofessional extends Teacher implements Serializable {
+    /*ESOLParaprofessional creates an object to represent this type of teacher
+    * It is Serializable so it can be written to binary and sent to the UI*/
+
     private ArrayList<String> languagesSpoken;
     private boolean WIDACertified = false;
     private boolean imagineLearningCertified = false;
@@ -10,12 +14,13 @@ public class ESOLParaprofessional extends Teacher {
     public ESOLParaprofessional(String firstName, String lastName, String emailAddress, String title, String gradeLevel,
                                 ArrayList<String> languagesSpoken, boolean WIDACertified,
                                 boolean imagineLearningCertified) {
-        super(firstName, lastName, emailAddress, gradeLevel, title);
+        super(firstName, lastName, emailAddress, title, gradeLevel);
         this.languagesSpoken = languagesSpoken;
         this.WIDACertified = WIDACertified;
         this.imagineLearningCertified = imagineLearningCertified;
     }
 
+    //Awaiting Implementation
     public void getLanguagesSpoken() {
         System.out.printf("***%s %s %s speaks***\n", getTitle(), getFirstName(), getLastName());
         //Print spoken languages from array
@@ -49,7 +54,7 @@ public class ESOLParaprofessional extends Teacher {
     @Override
     public String toString() {
 
-        return "***ESOLTeacher*** \n" +
+        return "***ESOLParaProfessional*** \n" +
                 "Name: " + getTitle() + " " + getFirstName() + " " + getLastName() + "\n" +
                 "Email Address: " + getEmailAddress() + "\n" +
                 "Grade Level: " + getGradeLevel() +"\n" +

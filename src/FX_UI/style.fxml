@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.collections.FXCollections?>
+
+<GridPane fx:controller="FX_UI.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+
+    <!--    Sets and styles title of program-->
+    <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" alignment="TOP_CENTER">
+        <Label  text="Welcome" textFill="crimson">
+            <font>
+                <Font name="Brush Script MT Italic" size="45"/>
+            </font>
+        </Label>
+        <Label text="to">
+            <font>
+                <Font name="Brush Script MT Italic" size="45" />
+            </font>
+        </Label>
+        <Label  text="ESOL-SMS" textFill="crimson">
+            <font>
+                <Font name="Brush Script MT Italic" size="35"/>
+            </font>
+        </Label>
+    </VBox>
+
+    <!--    Selection menu for type of search using combobox-->
+    <ComboBox fx:id="comboBox" GridPane.rowIndex="3" GridPane.columnIndex="0" >
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:id="gradeLevel" fx:value="Search by Grade Level"/>
+                <String fx:id="englishLevel" fx:value="Search by English Level"/>
+                <String fx:id="lastName" fx:value="Search by Last Name"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <!--    Textbox for search parameter-->
+    <TextField fx:id="nameField" GridPane.rowIndex="4" GridPane.columnIndex="0"
+               onKeyReleased="#handleKeyReleased"/>
+
+    <!--    When button is pressed, search is performed-->
+    <Button fx:id="searchButton" GridPane.rowIndex="5" GridPane.columnIndex="0" text="Search"
+            onAction="#onButtonClick"/>
+
+<!--    Text area for search results-->
+<!--    <TextArea fx:id="results" GridPane.rowIndex="6" GridPane.columnIndex="0" />-->
+</GridPane>

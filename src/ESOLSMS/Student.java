@@ -1,5 +1,6 @@
 package ESOLSMS;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -8,7 +9,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Student {
+public class Student implements Serializable{
+    /*Student sets base parameters for different types of students
+     * It is Serializable so it can be written to binary and sent to the UI*/
 
     private String firstName;
     private String lastName;
@@ -56,6 +59,8 @@ public class Student {
 
     //Calculates age of student based on DOB yyyy/mm/dd
     public int calculateAge() throws ParseException {
+        /*Calculates age from user input when adding student
+        * using the Edit.java class*/
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date birthDate = null;

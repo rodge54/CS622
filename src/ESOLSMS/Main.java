@@ -1,7 +1,5 @@
 package ESOLSMS;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -9,6 +7,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
+    /*Runs ESOL-SMS program with no UI*/
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -34,48 +33,9 @@ public class Main {
         //Print Welcome Message
         Menus.welcomeMessage();
 
-        //Check if file exists
-        File studentFile = new File("studentInfo.txt");
-        boolean exists = studentFile.exists();
-
-        //Create scanner if file exists, else exit program
-        Scanner sc = null;
-        if (exists){
-            sc = new Scanner(studentFile);
-        }
-        else {
-            System.out.println(studentFile + " NOT FOUND, Please contact Program Admin");
-            System.out.println();
-            System.exit(0);
-        }
-
-        //Initialize student variables
-        String firstName = null;
-        String lastName = null;
-        String birthDate = null;
-        String gradeLevel = null;
-        int studentId = 0;
-        String englishLevel = null;
-        String firstLanguage = null;
-
-        //Build STUDENT ArrayList from studentFile
-        while (sc.hasNext()){
-            firstName = sc.next();
-            lastName = sc.next();
-            birthDate = sc.next();
-            gradeLevel = sc.next();
-            studentId = sc.nextInt();
-            englishLevel = sc.next();
-            firstLanguage = sc.next();
-            //Don't read in teacherArr
-            sc.next();
-            studArr.add(new ESOLStudent(firstName, lastName, birthDate,
-                    gradeLevel, studentId, englishLevel, firstLanguage, teachersArr));
-        }
-        sc.close();
-
         //Create ESOLStudentSearch Object class using ESOLStudent -
         ESOLStudentTeacherSearch studSearch = new ESOLStudentTeacherSearch();
+
         int i;
         boolean correct = false;
 
@@ -83,7 +43,7 @@ public class Main {
 
             Menus.startMenu();
 
-            sc = new Scanner(System.in);//New Scanner
+            Scanner sc = new Scanner(System.in);//New Scanner
             int userInput1 = 0;
 
             //Checks that selection from numbered list is correct
@@ -103,18 +63,21 @@ public class Main {
             switch (userInput1){
 
                 case 1:
+                    studArr = studSearch.buildStudentArray();
                     System.out.println("Please enter the Last Name of Students you would like to find: ");
                     userInput2 = sc.nextLine();
                     correct = GenericClass.printPersonv2(studSearch.searchByLastNameWithStream(userInput2, studArr));
                     break;
 
                 case 2:
+                    studArr = studSearch.buildStudentArray();
                     System.out.println("Please enter the English Level of Student's you would like to find: ");
                     userInput2 = sc.nextLine();
                     correct = GenericClass.printPersonv2(studSearch.searchByEnglishLevelWithStream(userInput2, studArr));
                     break;
 
                 case 3:
+                    studArr = studSearch.buildStudentArray();
                     System.out.println("Please enter the Grade Level of Students you would like to find: ");
                     userInput2 = sc.nextLine();
                     correct = GenericClass.printPersonv2(studSearch.searchByGradeLevelWithStream(userInput2, studArr));
@@ -147,7 +110,7 @@ public class Main {
                     System.out.println("Not in list, please enter new number");
                     TimeUnit.SECONDS.sleep(2);
             }
+            sc.close();//Close Scanner
         }
-        sc.close();//Close Scanner
     }
 }

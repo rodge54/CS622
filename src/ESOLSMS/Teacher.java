@@ -1,6 +1,8 @@
 package ESOLSMS;
 
 public class Teacher {
+    /*Teacher sets base parameters for different types of teachers
+     * It is Serializable so it can be written to binary and sent to the UI*/
 
     private String firstName;
     private String lastName;

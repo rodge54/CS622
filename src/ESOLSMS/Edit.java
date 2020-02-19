@@ -1,19 +1,16 @@
 package ESOLSMS;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Edit {
     //The Edit class is intended to make changes to the student file
 
-    public void addESOLStudent() throws IOException{
+    public void addESOLStudent() {
         //addESOLStudent creates and writes student to file using userInput
 
         ArrayList<Teacher> teachersArr = new ArrayList<>();
@@ -26,9 +23,8 @@ public class Edit {
         String englishLevel = null;
         String firstLanguage = null;
 
-        Scanner sc = new Scanner(System.in); //Open scanner
         //Accept userInput and update variables
-        try {
+        try (Scanner sc = new Scanner(System.in)){//Open/Close Scanner
 
             System.out.println("Student's First Name:");
             firstName = sc.nextLine();
@@ -75,24 +71,15 @@ public class Edit {
         catch (InputMismatchException e) {
             e.printStackTrace();
         }
-        finally {
-            sc.close();//close scanner
-        }
 
         //Create Student from user input using empty teachers array
         Student student = new ESOLStudent(firstName,lastName, birthDate, gradeLevel, studentId, englishLevel,firstLanguage, teachersArr);
 
         File studentFile = new File("studentInfo.txt");
-        boolean exists = studentFile.exists();
-        FileWriter fileWriter = null;
-
-        //Check if file exists and initialize FileWriter
-        if (exists) {
-            fileWriter = new FileWriter(studentFile, true);//Open fileWriter
-        }
 
         //Append student to file
-        try {
+        try (FileWriter fileWriter = new FileWriter(studentFile, true))
+            /*Open/Close fileWriter*/{
             fileWriter.append("\n" +
                     student.getFirstName() + " " +
                     student.getLastName() + " " +
@@ -107,10 +94,6 @@ public class Edit {
         //If file not found
         catch (IOException | NullPointerException e){
             System.out.println("File " + studentFile + " Not Found, Please contact Program Admin");
-        }
-        finally {
-            //Close fileWriter
-            if (fileWriter != null) sc.close();
         }
     }
 }

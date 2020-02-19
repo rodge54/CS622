@@ -1,9 +1,11 @@
 package ESOLSMS;
 
-import java.text.ParseException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ESOLTeacher extends Teacher{
+public class ESOLTeacher extends Teacher implements Serializable {
+    /*ESOLTeacher creates an object to represent this type of teacher
+     * It is Serializable so it can be written to binary and sent to the UI*/
 
     private ArrayList<String> languagesSpoken;
 
