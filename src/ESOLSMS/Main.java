@@ -33,6 +33,10 @@ public class Main {
         //Print Welcome Message
         Menus.welcomeMessage();
 
+        //Create Tables for ESOLSMS database
+        sqlUpdates.createESOLStudentTables();
+        sqlUpdates.createTeacherTables();
+
         //Create ESOLStudentSearch Object class using ESOLStudent -
         ESOLStudentTeacherSearch studSearch = new ESOLStudentTeacherSearch();
 

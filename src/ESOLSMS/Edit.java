@@ -8,7 +8,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Edit {
-    //The Edit class is intended to make changes to the student file
+    /*The Edit class is intended to make changes to the student
+    * file and add students to Database*/
 
     public void addESOLStudent() {
         //addESOLStudent creates and writes student to file using userInput
@@ -71,6 +72,9 @@ public class Edit {
         catch (InputMismatchException e) {
             e.printStackTrace();
         }
+
+        //Add student to database
+        sqlUpdates.addESOLStudent(firstName, lastName, birthDate, gradeLevel, studentId, englishLevel,firstLanguage);
 
         //Create Student from user input using empty teachers array
         Student student = new ESOLStudent(firstName,lastName, birthDate, gradeLevel, studentId, englishLevel,firstLanguage, teachersArr);
