@@ -13,7 +13,7 @@ public class StudentTest {
     public void calculateAge() throws ParseException {
         ArrayList<Teacher> teachersArr = new ArrayList<>();
         ArrayList<Student> studArr = new ArrayList<>();
-        studArr.add(new ESOLStudent("Robert","Rodgers",  "1987/09/13", "11", 1234, "2","Spanish", teachersArr));
+        studArr.add(new ESOLStudent("Robert","Rodgers",  "1987/09/13", "11", 1234, "2","Spanish"));
         assertEquals(32, studArr.get(0).calculateAge());
     }
 }

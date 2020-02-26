@@ -1,9 +1,5 @@
 package ESOLSMS;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -14,7 +10,6 @@ public class Edit {
     public void addESOLStudent() {
         //addESOLStudent creates and writes student to file using userInput
 
-        ArrayList<Teacher> teachersArr = new ArrayList<>();
         //Initialize variables
         String firstName = null;
         String lastName = null;
@@ -27,14 +22,28 @@ public class Edit {
         //Accept userInput and update variables
         try (Scanner sc = new Scanner(System.in)){//Open/Close Scanner
 
+            //Reset correct to false for input check
+            boolean correct = false;
             System.out.println("Student's First Name:");
-            firstName = sc.nextLine();
+            while (!correct){
+                firstName = sc.nextLine().trim();
+                if (!firstName.equals("")){
+                    correct = true;
+                } else System.out.println("Please re-enter First Name:");
+            }
 
+            //Reset correct to false for input check
+            correct = false;
             System.out.println("Student's Last Name:");
-            lastName = sc.nextLine();
+            while (!correct){
+                lastName = sc.nextLine().trim();
+                if (!lastName.equals("")){
+                    correct = true;
+                } else System.out.println("Please re-enter Last Name:");
+            }
 
             birthDate = null;
-            boolean correct = false;
+            correct = false;
             System.out.println("Student's Birthdate (yyyy/mm/dd):");
 
             //While loop checks for Birthdate validity
@@ -47,12 +56,19 @@ public class Edit {
                 }
             }
 
-            System.out.println("Student's Grade Level");
-            gradeLevel = sc.nextLine();
-
-            System.out.println("Student's ID Number");
+            //Reset correct to false for input check
             correct = false;
+            System.out.println("Student's Grade Level");
+            while (!correct){
+                gradeLevel = sc.nextLine().trim();
+                if (!gradeLevel.equals("")){
+                    correct = true;
+                } else System.out.println("Please re-enter Grade Level:");
+            }
 
+            //Reset correct to false for input check
+            correct = false;
+            System.out.println("Student's ID Number");
             while (!correct) {
                 String userInput = sc.nextLine();
                 try {
@@ -63,41 +79,31 @@ public class Edit {
                 }
             }
 
+            //Reset correct to false for input check
+            correct = false;
             System.out.println("Student's English Level:");
-            englishLevel = sc.nextLine();
+            while (!correct){
+                englishLevel = sc.nextLine().trim();
+                if (!englishLevel.equals("")){
+                    correct = true;
+                } else System.out.println("Please re-enter English Level:");
+            }
 
+            //Reset correct to false for input check
+            correct = false;
             System.out.println("Student's First Spoken Language:");
-            firstLanguage = sc.nextLine();
+            while (!correct){
+                firstLanguage = sc.nextLine().trim();
+                if (!firstLanguage.equals("")){
+                    correct = true;
+                } else System.out.println("Please re-enter First Spoken Language:");
+            }
         }
         catch (InputMismatchException e) {
             e.printStackTrace();
         }
 
         //Add student to database
-        sqlUpdates.addESOLStudent(firstName, lastName, birthDate, gradeLevel, studentId, englishLevel,firstLanguage);
-
-        //Create Student from user input using empty teachers array
-        Student student = new ESOLStudent(firstName,lastName, birthDate, gradeLevel, studentId, englishLevel,firstLanguage, teachersArr);
-
-        File studentFile = new File("studentInfo.txt");
-
-        //Append student to file
-        try (FileWriter fileWriter = new FileWriter(studentFile, true))
-            /*Open/Close fileWriter*/{
-            fileWriter.append("\n" +
-                    student.getFirstName() + " " +
-                    student.getLastName() + " " +
-                    student.getBirthDate() + " " +
-                    student.getGradeLevel() + " " +
-                    ((ESOLStudent) student).getStudentId() + " " +
-                    ((ESOLStudent) student).getEnglishLevel() + " " +
-                    ((ESOLStudent) student).getFirstLanguage() + " " +
-                    ((ESOLStudent) student).getTeachers());
-            System.out.println("Student added Successfully");
-        }
-        //If file not found
-        catch (IOException | NullPointerException e){
-            System.out.println("File " + studentFile + " Not Found, Please contact Program Admin");
-        }
+        SqlUpdates.addESOLStudentToDB(firstName, lastName, birthDate, gradeLevel, studentId, englishLevel,firstLanguage);
     }
 }

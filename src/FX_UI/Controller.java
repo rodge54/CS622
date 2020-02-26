@@ -2,14 +2,11 @@ package FX_UI;
 
 import ESOLSMS.*;
 import ESOLSMS.GenericClass;
-import ESOLSMS.FileBinaryOutput;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 public class Controller {
     /*Provides functionality for JavaFX UI*/
@@ -40,34 +37,33 @@ public class Controller {
 
     @FXML
     //Initialize search button disable when text box has no input
-    public void initialize() throws FileNotFoundException {
+    public void initialize() {
         searchButton.setDisable(true);
-        ESOLStudentTeacherSearch esolStudentTeacherSearch = new ESOLStudentTeacherSearch();
-        esolStudentTeacherSearch.buildStudentArray();
     }
 
     @FXML
-    public void onButtonClick(ActionEvent e) throws FileNotFoundException {
-        //Performs functions when button is pressed
-        ESOLStudentTeacherSearch esolStudentTeacherSearch = new ESOLStudentTeacherSearch();
-        ArrayList<Student> studArr;
-        studArr = FileBinaryOutput.inputFromBinaryFile();
+    public void onButtonClick(ActionEvent e) {
+        //Performs functions when search button is pressed
+
+        int studIndicator = 1;
+        SqlSearch sqlSearch = new SqlSearch();
 
         if(e.getSource().equals(searchButton) && comboBox.getValue().equals(gradeLevel)){
+            System.out.println("GradeLevel");
             //Search for student by grade level
-            GenericClass.printPersonv2(esolStudentTeacherSearch.searchByGradeLevelWithStream(nameField.getText(), studArr));
-
-
-
+            GenericClass.printPersonv2(sqlSearch.queryByGradeLevel(nameField.getText(), studIndicator));
         }
+
         else if(e.getSource().equals(searchButton) && comboBox.getValue().equals(englishLevel)){
-            //Search for student by grade level
-            GenericClass.printPersonv2(esolStudentTeacherSearch.searchByEnglishLevelWithStream(nameField.getText(), studArr));
+            //Search for student by english level
+            GenericClass.printPersonv2(sqlSearch.queryByEnglishLevel(nameField.getText(), studIndicator));
         }
+
         else if(e.getSource().equals(searchButton) && comboBox.getValue().equals(lastName)){
             //Search for student by grade level
-            GenericClass.printPersonv2(esolStudentTeacherSearch.searchByLastNameWithStream(nameField.getText(), studArr));
+            GenericClass.printPersonv2(sqlSearch.queryByLastName(nameField.getText(), studIndicator));
         }
+
         //Disables the submit button so the user cannot press it
         // until changes are made in the text box
         searchButton.setDisable(true);

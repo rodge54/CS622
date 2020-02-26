@@ -1,7 +1,5 @@
 package ESOLSMS;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -9,36 +7,16 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     /*Runs ESOL-SMS program with no UI*/
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-
-        //Build Arrays for students and languages spoken.
-        ArrayList<String> langArr = new ArrayList<>();
-        ArrayList<String> langArr1 = new ArrayList<>();
-        ArrayList<Student> studArr = new ArrayList<>();
-
-        langArr.add("English");
-        langArr.add("Italian");
-        ArrayList<Teacher> teachersArr = new ArrayList<>();
-
-        //Build teachers and paraprofessionals as examples
-        Teacher esolTeach = new ESOLTeacher("Marika","Ruzzon",
-                "marika@email.com","Ms.", "12", langArr);
-        Teacher esolPara = new ESOLParaprofessional("Donald","Trump",
-                "realDonaldTrump@twitter.com", "President", "11",
-                langArr1, false, false);
-        teachersArr.add(esolTeach);
-        teachersArr.add(esolPara);
+    public static void main(String[] args) throws InterruptedException {
 
 //       *****************************************MAIN PROGRAM START************************************************
         //Print Welcome Message
         Menus.welcomeMessage();
 
         //Create Tables for ESOLSMS database
-        sqlUpdates.createESOLStudentTables();
-        sqlUpdates.createTeacherTables();
-
-        //Create ESOLStudentSearch Object class using ESOLStudent -
-        ESOLStudentTeacherSearch studSearch = new ESOLStudentTeacherSearch();
+        SqlUpdates.createStudentTables();
+        SqlUpdates.createESOLStudentTables();
+        SqlUpdates.createTeacherTables();
 
         int i;
         boolean correct = false;
@@ -63,28 +41,30 @@ public class Main {
             sc = new Scanner(System.in);//New scanner
             String userInput2;
 
+            //Variables indicate if searching for teacher or student
+            int studIndicator = 1;
+            int teachIndicator = 2;
+            SqlSearch sqlSearch = new SqlSearch();
+
             //Each Menu Item is represented through switch cases
             switch (userInput1){
 
                 case 1:
-                    studArr = studSearch.buildStudentArray();
                     System.out.println("Please enter the Last Name of Students you would like to find: ");
                     userInput2 = sc.nextLine();
-                    correct = GenericClass.printPersonv2(studSearch.searchByLastNameWithStream(userInput2, studArr));
+                    correct = GenericClass.printPersonv2(sqlSearch.queryByLastName(userInput2, studIndicator));
                     break;
 
                 case 2:
-                    studArr = studSearch.buildStudentArray();
                     System.out.println("Please enter the English Level of Student's you would like to find: ");
                     userInput2 = sc.nextLine();
-                    correct = GenericClass.printPersonv2(studSearch.searchByEnglishLevelWithStream(userInput2, studArr));
+                    correct = GenericClass.printPersonv2(sqlSearch.queryByEnglishLevel(userInput2, studIndicator));
                     break;
 
                 case 3:
-                    studArr = studSearch.buildStudentArray();
                     System.out.println("Please enter the Grade Level of Students you would like to find: ");
                     userInput2 = sc.nextLine();
-                    correct = GenericClass.printPersonv2(studSearch.searchByGradeLevelWithStream(userInput2, studArr));
+                    correct = GenericClass.printPersonv2(sqlSearch.queryByGradeLevel(userInput2, studIndicator));
                     break;
 
                 case 4:
@@ -96,13 +76,13 @@ public class Main {
                 case 5:
                     System.out.println("Please enter the Grade Level of Teachers you would like to find: ");
                     userInput2 = sc.nextLine();
-                    correct = GenericClass.printPersonv2(studSearch.searchByGradeLevelWithStream(userInput2, teachersArr));
+                    correct = GenericClass.printPersonv2(sqlSearch.queryByGradeLevel(userInput2, teachIndicator));
                     break;
 
                 case 6:
                     System.out.println("Please enter the Last Name of Teachers you would like to find: ");
                     userInput2 = sc.nextLine();
-                    correct = GenericClass.printPersonv2(studSearch.searchByLastNameWithStream(userInput2, teachersArr));
+                    correct = GenericClass.printPersonv2(sqlSearch.queryByLastName(userInput2, teachIndicator));
                     break;
 
                 case 7:
