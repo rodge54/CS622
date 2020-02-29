@@ -14,7 +14,7 @@ public class Main extends Application {
         //Sets primary stage
         Parent root = FXMLLoader.load(getClass().getResource("style.fxml"));
         primaryStage.setTitle("ESOL-SMS");
-        primaryStage.setScene(new Scene(root, 1000, 700));
+        primaryStage.setScene(new Scene(root, 800, 800));
         primaryStage.show();
     }
 

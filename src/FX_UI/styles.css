@@ -1,0 +1,22 @@
+.button {
+    -fx-background-color: crimson;
+    -fx-text-fill: black;
+}
+.combo-box {
+    -fx-background-color: crimson;
+    -fx-text-fill: black;
+}
+
+.table-view{
+    -fx-background-color: black;
+    -fx-text-fill: white;
+
+}
+#tableDefaultText{
+    -fx-font-size: 40;
+}
+
+.root{
+    -fx-background-color: dimgray;
+}
+

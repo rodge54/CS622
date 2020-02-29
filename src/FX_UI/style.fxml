@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 
 <GridPane fx:controller="FX_UI.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
+          stylesheets="@styles.css" >
 
     <!--    Sets and styles title of program-->
-    <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" alignment="TOP_CENTER">
-        <Label  text="Welcome" textFill="crimson">
+    <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" alignment="CENTER">
+        <Label text="Welcome" textFill="crimson">
             <font>
                 <Font name="Brush Script MT Italic" size="45"/>
             </font>
         </Label>
-        <Label text="to">
+        <Label text="to" textFill="white">
             <font>
                 <Font name="Brush Script MT Italic" size="45" />
             </font>
@@ -29,24 +31,81 @@
     </VBox>
 
     <!--    Selection menu for type of search using combobox-->
-    <ComboBox fx:id="comboBox" GridPane.rowIndex="3" GridPane.columnIndex="0" >
-        <items>
-            <FXCollections fx:factory="observableArrayList">
-                <String fx:id="gradeLevel" fx:value="Search by Grade Level"/>
-                <String fx:id="englishLevel" fx:value="Search by English Level"/>
-                <String fx:id="lastName" fx:value="Search by Last Name"/>
-            </FXCollections>
-        </items>
-    </ComboBox>
+    <VBox GridPane.rowIndex="3" GridPane.columnIndex="0"  alignment="CENTER">
+        <ComboBox fx:id="comboBox">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:id="gradeLevel" fx:value="Search by Grade Level"/>
+                    <String fx:id="englishLevel" fx:value="Search by English Level"/>
+                    <String fx:id="lastName" fx:value="Search by Last Name"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+    </VBox>
 
     <!--    Textbox for search parameter-->
-    <TextField fx:id="nameField" GridPane.rowIndex="4" GridPane.columnIndex="0"
-               onKeyReleased="#handleKeyReleased"/>
+    <HBox GridPane.rowIndex="4" GridPane.columnIndex="0" alignment="CENTER">
+        <TextField fx:id="nameField"  onKeyReleased="#handleKeyReleased">
+        </TextField>
+    </HBox>
 
     <!--    When button is pressed, search is performed-->
-    <Button fx:id="searchButton" GridPane.rowIndex="5" GridPane.columnIndex="0" text="Search"
-            onAction="#onButtonClick"/>
+    <VBox GridPane.rowIndex="5" GridPane.columnIndex="0" alignment="CENTER">
+        <Button fx:id="searchButton"  text="Search"
+                onAction="#onButtonClick"/>
+    </VBox>
 
-<!--    Text area for search results-->
-<!--    <TextArea fx:id="results" GridPane.rowIndex="6" GridPane.columnIndex="0" />-->
+    <!--    If No Student Found-->
+    <VBox  GridPane.rowIndex="6" GridPane.columnIndex="0" alignment="CENTER">
+        <Label fx:id="searchResultsEmpty" text="No Student's Found" textFill="crimson">
+            <font>
+                <Font name="Brush Script MT Italic" size="45"/>
+            </font>
+        </Label>
+    </VBox>
+
+    <!--    Results of searches listed here-->
+    <TableView fx:id="searchResultsTable" GridPane.rowIndex="6" GridPane.columnIndex="0">
+        <placeholder>
+            <Label fx:id="tableDefaultText" text="Searching..."/>
+        </placeholder>
+        <columns>
+            <TableColumn text = "First Name">
+                <cellValueFactory>
+                    <PropertyValueFactory property="firstName"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text = "Last Name" prefWidth="90">
+                <cellValueFactory>
+                    <PropertyValueFactory property="lastName"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text = "Age" prefWidth="50">
+                <cellValueFactory>
+                    <PropertyValueFactory property="age"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text = "Grade Level" prefWidth="90">
+                <cellValueFactory>
+                    <PropertyValueFactory property="gradeLevel"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text = "English Level">
+                <cellValueFactory>
+                    <PropertyValueFactory property="englishLevel"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text = "First Spoken Language" prefWidth="150">
+                <cellValueFactory>
+                    <PropertyValueFactory property="firstLanguage"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+            </FXCollections>
+        </items>
+    </TableView>
+    <ProgressBar fx:id="progressBar" GridPane.rowIndex="7" GridPane.columnIndex="0" prefHeight="20" prefWidth="550" />
+
 </GridPane>

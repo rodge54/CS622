@@ -36,7 +36,6 @@ public class SqlSearch {
     public static final String COLUMN_TEACHER_GRADE_LEVEL = "gradeLevel";
 
     public ArrayList<?> queryByLastName(String name, int indicator){
-        newStudArr.clear();
         /*This method searches for students or teachers by last name based
         on users choice at the main menu*/
 
@@ -102,7 +101,6 @@ public class SqlSearch {
     }
 
     public ArrayList<?> queryByEnglishLevel(String level, int indicator){
-        newStudArr.clear();
         /*This method searches for students or teachers by English Speaking Level
          based on users choice at the main menu*/
 
